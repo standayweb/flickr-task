@@ -39,7 +39,18 @@ class App extends Component<Props, State> {
 
   render() {
     if (this.state.loading) {
-      return <Photos>Loading Photos</Photos>;
+      return (
+        <Photos>
+          <img
+            src="public/loading-spinner.gif"
+            alt="Loading Photos"
+            css={{
+              position: 'relative',
+              top: 120,
+            }}
+          />
+        </Photos>
+      );
     }
 
     if (this.state.err || !this.state.flickrFeed) {
@@ -48,8 +59,9 @@ class App extends Component<Props, State> {
 
     return (
       <Photos>
-        {this.state.flickrFeed.items.map(photo => (
+        {this.state.flickrFeed.items.map((photo, index) => (
           <Photo
+            index={index}
             url={photo.media.m}
             link={photo.link}
             title={photo.title}

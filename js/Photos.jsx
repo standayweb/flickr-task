@@ -6,6 +6,7 @@ const Photos = (props: Object) => (
     css={{
       display: 'flex',
       flexWrap: 'wrap',
+      justifyContent: 'center',
       padding: 24,
       margin: '0 -12px',
     }}

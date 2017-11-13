@@ -1,16 +1,16 @@
 // @flow
 import React from 'react';
-import { css } from 'glamor';
+import { css, keyframes } from 'glamor';
 
-type Props = {
-  url: string,
-  link: string,
-  title: string,
-  author: string,
-  authorId: string,
-  description: string,
-  tags: string,
-};
+const fadeInUp = keyframes({
+  '0%': {
+    transform: 'translate3d(0, 40px ,0)',
+  },
+  '100%': {
+    transform: 'translate3d(0, 0, 0)',
+    opacity: 1,
+  },
+});
 
 const style = css({
   display: 'flex',
@@ -54,6 +54,17 @@ const style = css({
   },
 });
 
+type Props = {
+  index: number,
+  url: string,
+  link: string,
+  title: string,
+  author: string,
+  authorId: string,
+  description: string,
+  tags: string,
+};
+
 const Photo = (props: Props) => {
   // we want the larger version flickr also hosts
   const url = props.url.replace('_m', '_b');
@@ -73,7 +84,14 @@ const Photo = (props: Props) => {
   const tags = props.tags.split(' ').join(', ');
 
   return (
-    <div className={style}>
+    <div
+      className={style}
+      css={{
+        opacity: 0,
+        animation: `${fadeInUp} 0.6s ${props.index / 10}s`,
+        animationFillMode: 'forwards',
+      }}
+    >
       <div
         css={{
           background: `#ccc url(${url}) center / cover`,
